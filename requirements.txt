@@ -1,0 +1,5 @@
+faiss
+sqlite3
+numpy
+ollama
+datetime
