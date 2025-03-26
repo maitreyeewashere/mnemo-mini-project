@@ -78,11 +78,8 @@ def chat(query):
     ret = retrieve_entries(query)
     context = '\n'.join([f" - {chunk}" for chunk, _ in ret])
     instruction_prompt = f'''
-    You are an assistant helping the user recall their past experiences.
-    Use only the following pieces of context to answer the question. Answer directly to the point. 
-    Do not make up any information not explicitly mentioned:
-    {context}
-    '''
+    You are 'mnemo', an assistant helping the user recall their past experiences.
+    The context given is what you have stored in the database about whatever memories i have told you before. Use them to answer the question. Answer directly to the point and dont make up anything extra even if it might be relevant. You can be slightly conversational and friendly but not confusing. Do not make up any information not explicitly mentioned in the context. If I say 'hello' or 'thank you', you can reply accordingly:{context}'''
     
     stream = ollama.chat(
         model=LANGUAGE_MODEL,
@@ -94,12 +91,16 @@ def chat(query):
     )
     
     print("\nChatbot response:")
+    response = ''
     for chunk in stream:
         print(chunk['message']['content'], end='', flush=True)
+        response += chunk['message']['content']
 
-if __name__ == '__main__':
+    return response    
+
+def askmnemo(query):
     initdb()
     preload_entries()
-    question = input("Ask mnemo: ")
-    print(f'Querying mnemo... searching database... {question}')
-    chat(question)
+    print(f'Querying mnemo... searching database... {query}')
+    return chat(query)
+
