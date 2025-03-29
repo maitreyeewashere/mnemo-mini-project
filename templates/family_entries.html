@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Entry</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #d6e6ff, #f6d5f7);
+            margin: 0;
+            padding: 0;
+            justify-items: center;
+            align-items: center;
+            height: 78vh;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: black;
+            font-weight: bold;
+            font-size: large;
+            padding: 10px 20px; 
+            position: fixed; 
+            top: 0; 
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav-links{
+            margin-right: 20px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: black;
+            font-family:Georgia, 'Times New Roman', Times, serif;
+            font-size: larger;
+            margin-right: 20px; /* Space between links */
+            font-size: 14px; /* Font size for links */
+        }
+
+        .navbar a:hover {
+            text-decoration: underline; /* Adds underline on hover */
+        }
+
+        .form-container {
+            background: linear-gradient(135deg, #c4dbff, #fdc6ff);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            margin-top: 120px; 
+        }
+
+        h1 {
+            text-align: center;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="datetime-local"] {
+            width: calc(100% - 20px); 
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0062cb;
+            color: white;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color:#0056b3 ;
+       }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="/static/logo.png" alt="logo" style="width:auto;height:100px;">
+        </div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+    <div class="form-container">
+        <h1>Add Family Member</h1>
+        <form action="/add_person" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="relationship">Relationship:</label>
+            <input type="text" id="relationship" name="relationship">
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+
+</html>

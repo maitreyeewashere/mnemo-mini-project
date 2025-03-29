@@ -1,13 +1,18 @@
 import sqlite3
 from datetime import datetime
+from flask import Flask, request, redirect, render_template
 
-def add_entry(text, tags=None, people=None):
+app = Flask(__name__)
+
+def add_entry(text, date=None, tags=None, people=None):
     conn = sqlite3.connect('mnemo.db')
     cursor = conn.cursor()
     
-    date = datetime.now().isoformat()
+    if not date:
+        date = datetime.now().isoformat()
+
     people_str = ', '.join(people) if people else None
-    
+
     cursor.execute("INSERT INTO entries(date, text, tags, people) VALUES (?, ?, ?, ?)",
                    (date, text, tags, people_str))
     entry_id = cursor.lastrowid
@@ -15,6 +20,7 @@ def add_entry(text, tags=None, people=None):
     conn.close()
 
     print(f'Entry {entry_id} added.')
+
 
 
 def add_person(name, rel=None):
@@ -28,5 +34,3 @@ def add_person(name, rel=None):
     conn.close()
 
     print(f'Entry {person_id} added.')
-
-add_entry('I have a test in April','school,exams,reminder')
