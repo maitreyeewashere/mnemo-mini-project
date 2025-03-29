@@ -1,5 +1,7 @@
-faiss
+faiss-cpu
 sqlite3
 numpy
 ollama
 datetime
+flask
+flask-cors
