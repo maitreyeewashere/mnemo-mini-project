@@ -30,6 +30,7 @@ def chatwithmnemo():
 
     return jsonify({'response':response})
 
+
 @app.route('/chatbot')
 def chatbot():
     return render_template('chatbot.html')
