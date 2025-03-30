@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,7 +46,6 @@
 
         .nav-links a:hover {
             color: #000000;
-            /* Highlight color */
         }
 
         .hamburger {
@@ -298,7 +296,6 @@
 </head>
 
 <body>
-
     <nav class="navbar">
         <div class="logo">
             <img src="/static/logo.png" alt="logo" style="width:auto;height:100px;">
@@ -317,16 +314,30 @@
 
     <div class="container">
         <div class="leftSection">
-            <div class="card">
-                <h2>Chat with mnemo</h2>
+            <div class="card" style="position: relative;">
+                <div style="position: absolute; top: 10px; right: 10px">
+                    <button id="maximize-button" style=" cursor: pointer;background-color: #00000000; border-color: #00000000;">
+                        <img src="/static/full_screen.png" height="20px" width="auto" />
+                    </button>
+                </div>
+            <h2 style="text-align: center">Chat with mnemo</h2>
+            <div id="chatbox-container">
                 <div id="chatbox"></div>
-                <input type="text" id="userInput" placeholder="what's on your mind?" />
+                <input type="text" id="userInput" placeholder="what's on your mind?" style="width: 75%" />
                 <button class="sending" onclick="sendMsg()">
                     <img src="/static/send.png" alt="send icon" />
                 </button>
             </div>
         </div>
+    </div>
 
+    <script>
+        document
+            .getElementById("maximize-button")
+            .addEventListener("click", function () {
+            window.location.href = "/chatbot";
+        });
+    </script>
 
         <div class="rightSection">
             <div class="card">
@@ -345,8 +356,6 @@
             </div>
         </div>
     </div>
-
-
 
     <h1
         style="justify-self: center; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
@@ -455,7 +464,7 @@
             inputfield.value = "";
             chatbox.scrollTop = chatbox.scrollHeight;
 
-            let response = await fetch("http://127.0.0.1:8000/chat", {
+            let response = await fetch("http://127.0.0.1:5500/chat", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -470,7 +479,5 @@
             chatbox.appendChild(botmsg);
         }
     </script>
-
 </body>
-
 </html>
